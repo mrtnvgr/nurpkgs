@@ -1,14 +1,10 @@
 name: "Build"
 
 on:
-  pull_request:
   push:
-    branches:
-      - main
-      - master
   schedule:
-    # rebuild everyday at 6:40
-    - cron:  '40 6 * * *'
+    - cron: "40 6 * * *" # everyday at 6:40
+  workflow_dispatch:
 
 jobs:
   tests:
