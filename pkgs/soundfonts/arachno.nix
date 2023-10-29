@@ -22,5 +22,6 @@ stdenvNoCC.mkDerivation rec {
     homepage = "http://www.arachnosoft.com/main/soundfont.php";
     license = licenses.unfree;
     platforms = platforms.all;
+    binary = true;
   };
 }
