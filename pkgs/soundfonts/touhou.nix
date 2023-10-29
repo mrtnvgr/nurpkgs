@@ -22,6 +22,5 @@ stdenvNoCC.mkDerivation rec {
     homepage = "https://musical-artifacts.com/artifacts/433";
     license = licenses.cc-by-40;
     platforms = platforms.all;
-    maintainers = with maintainers; [ mrtnvgr ];
   };
 }
