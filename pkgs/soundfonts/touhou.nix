@@ -6,7 +6,7 @@ stdenvNoCC.mkDerivation rec {
 
   src = fetchurl {
     url = "https://musical-artifacts.com/artifacts/433/Touhou.sf2";
-    sha256 = "sha256-wFNy92FkqskW+ZE1UPq50w1lDPIF8ADaJ1E6uYBUtBk=";
+    hash = "sha256-wFNy92FkqskW+ZE1UPq50w1lDPIF8ADaJ1E6uYBUtBk=";
   };
 
   phases = [ "installPhase" ];
