@@ -22,6 +22,8 @@ in rec {
   # Games
   celeste-classic = p ./pkgs/games/celeste-classic.nix { };
 
-  # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
-  # ...
+  # Hotfixes
+  # Updates libvterm to v0.3.3 for neovim nightly
+  # NOTE: https://github.com/nix-community/neovim-nightly-overlay/issues/332
+  libvterm-neovim = p ./pkgs/hotfixes/libvterm-neovim.nix { };
 }

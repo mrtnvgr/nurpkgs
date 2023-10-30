@@ -10,3 +10,5 @@
 - **Soundfonts**: [arachno](http://www.arachnosoft.com/main/soundfont.php), [touhou](https://musical-artifacts.com/artifacts/433)
 
 - **Games**: [celeste-classic](https://celesteclassic.github.io/)
+
+- **Hotfixes**: [libvterm-neovim](https://github.com/nix-community/neovim-nightly-overlay/issues/332)
