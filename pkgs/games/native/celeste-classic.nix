@@ -1,7 +1,7 @@
 { stdenvNoCC, fetchzip, autoPatchelfHook, pkgs, lib, practiceMod ? false }:
 
 let
-  folder = if practiceMod then "CELESTE" else "CELESTE Practice Mod";
+  folder = if practiceMod then "CELESTE Practice Mod" else "CELESTE";
   bin = if practiceMod then "celeste_practice_mod" else "celeste";
 in stdenvNoCC.mkDerivation {
   pname = "celeste-classic";
