@@ -28,6 +28,7 @@ let
   };
 in stdenvNoCC.mkDerivation {
   inherit name;
+  version = "1.4.0.0";
 
   phases = "installPhase";
   installPhase = ''
