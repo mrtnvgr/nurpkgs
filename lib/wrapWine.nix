@@ -17,7 +17,7 @@ in
 , silent ? true
 , preScript ? ""
 , postScript ? ""
-, firstrunScript ? ""
+, setupScript ? ""
 }:
 let
   wineBin = "${wine}/bin/wine${if is64bits then "64" else ""}";
@@ -54,7 +54,7 @@ let
       ${tricksHook}
       wineserver -w
 
-      ${firstrunScript}
+      ${setupScript}
     fi
 
     ${if chdir != null 
