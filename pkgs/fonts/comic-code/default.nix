@@ -21,5 +21,6 @@ stdenvNoCC.mkDerivation {
     homepage = "https://tosche.net/fonts/comic-code";
     license = licenses.unfree;
     platforms = platforms.all;
+    unsafe = true;
   };
 }
