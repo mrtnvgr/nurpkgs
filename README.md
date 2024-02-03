@@ -25,6 +25,7 @@
 ### Audio
 
 - [reaper-sws-extension](https://www.sws-extension.org/)
+- [neuralnote](https://github.com/DamRsn/NeuralNote)
 
 ### Overrides
 

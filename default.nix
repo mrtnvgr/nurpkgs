@@ -48,6 +48,7 @@ in rec {
   # Audio
 
   reaper-sws-extension = p ./pkgs/audio/reaper-sws-extension { };
+  neuralnote = p ./pkgs/audio/neuralnote { };
 
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
