@@ -22,6 +22,10 @@
 
 - _[comic-code](https://tosche.net/fonts/comic-code)_
 
+### Audio
+
+- [reaper-sws-extension](https://www.sws-extension.org/)
+
 ### Overrides
 
 - **obs-wayland** - obs with plugins for wayland and pipewire support
