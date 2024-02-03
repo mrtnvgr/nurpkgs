@@ -27,7 +27,7 @@
 }:
 let
   buildType = "Release";
-  libonnxruntime-neuralnote = callPackage ./libonnxruntime-neuralnote.nix;
+  libonnxruntime-neuralnote = callPackage ./libonnxruntime-neuralnote.nix { };
 in
 stdenv.mkDerivation rec {
   pname = "NeuralNote";
