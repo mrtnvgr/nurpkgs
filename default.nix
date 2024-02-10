@@ -49,16 +49,9 @@ in rec {
   # note: zip suffix doesn't mean that only zip archives are supported,
   #       so that's why gz here is like an generic term for compression algorithms
   # source: https://www.reddit.com/r/NixOS/comments/kqe57g/comment/gi3uii6
-  fetchzip-gz = args: (pkgs.fetchzip args).overrideAttrs (_: {
-    setupHook = /* bash */ ''
-      unpackCmdHooks+=(_tryDecomp)
-      _tryDecomp() {
-        local fn="$1"
-        if ! [[ "$fn" =~ \.zst$ ]]; then zstd -od "$fn"; return; fi
-        if ! [[ "$fn" =~ \.gz$ ]]; then gzip -cd "$fn"; return; fi
-      }
-    '';
-  });
+  fetchzip-gz = args: pkgs.fetchzip ({
+    nativeBuildInputs = with pkgs; [ zstd ];
+  } // args);
 
   # Audio
 
