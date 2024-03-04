@@ -9,15 +9,20 @@ let
 in
 { name
 , executable
+, chdir ? null
+
 , is64bits ? false
+
 , tricks ? [ ]
 , silent ? true
-, chdir ? null
+
 , preScript ? ""
 , postScript ? ""
 , setupScript ? ""
+
 , wine ? if is64bits then pkgs.wineWowPackages.stagingFull else pkgs.wine-staging
 , wineFlags ? ""
+
 # Useful for native linux apps that require wine environment (e.g. reaper with yabridge)
 , isWinBin ? true
 , meta ? {}
