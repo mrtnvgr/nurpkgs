@@ -9,7 +9,7 @@ let
 in
 { name
 , executable
-, chdir ? null
+, workdir ? null
 
 , is64bits ? false
 
@@ -60,7 +60,7 @@ in writeTextFile {
       ${setupScript}
     fi
 
-    ${optionalString (chdir != null) "cd \"${chdir}\""}
+    ${optionalString (workdir != null) "cd \"${workdir}\""}
 
     # $REPL is defined => start a shell in the context
     if [ ! "$REPL" == "" ]; then
