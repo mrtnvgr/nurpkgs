@@ -11,7 +11,7 @@ in
 , executable
 , workdir ? null
 
-, is64bits ? false
+, is64bits ? true
 
 , tricks ? [ ]
 , silent ? true
@@ -20,7 +20,7 @@ in
 , postScript ? ""
 , setupScript ? ""
 
-, wine ? if is64bits then pkgs.wineWowPackages.stagingFull else pkgs.wine-staging
+, wine ? pkgs.wine-staging
 , wineFlags ? ""
 
 # Useful for native linux apps that require wine environment (e.g. reaper with yabridge)
