@@ -27,7 +27,7 @@ let
 
   requiredPackages = [ wine cabextract ];
 
-  tricksHook = optionalString ((length tricks) > 0) ''
+  tricksHook = optionalString ((length tricks) > 0) /* bash */ ''
     pushd $(mktemp -d)
       ${winetricks}/bin/winetricks ${optionalString silent "-q"} ${concatStringsSep " " tricks}
     popd
@@ -35,7 +35,7 @@ let
 in writeTextFile {
   inherit name meta;
 
-  text = ''
+  text = /* bash */ ''
     #! ${runtimeShell}
 
     export WINEARCH=win${if is64bits then "64" else "32"}
