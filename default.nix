@@ -60,7 +60,7 @@ in rec {
   neural-amp-modeler-lv2 = p ./pkgs/audio/neural-amp-modeler-lv2 { };
   artworks = p ./pkgs/audio/artworks { };
   nam-trainer = p ./pkgs/audio/nam-trainer { };
-  mod-desktop = p ./pkgs/audio/mod-desktop { };
+  # mod-desktop = p ./pkgs/audio/mod-desktop { };
 
   # Misc
   cbmp = p ./pkgs/misc/cbmp { };
