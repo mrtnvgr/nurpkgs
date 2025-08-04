@@ -48,10 +48,7 @@ in rec {
   fetchurl-gz = p ./pkgs/fetchers/fetchurl-gz { };
 
   # Audio
-  bitwig-custom-unwrapped = p ./pkgs/audio/bitwig-custom/unwrapped.nix { };
-  bitwig-custom = p ./pkgs/audio/bitwig-custom/bitwig-wrapper.nix {
-    bitwig-studio-unwrapped = bitwig-custom-unwrapped;
-  };
+  bitwig-custom = p ./pkgs/audio/bitwig-custom/default.nix { };
 
   TAL-NoiseMaker = p ./pkgs/audio/TAL-NoiseMaker { };
   reaper-sws-extension = p ./pkgs/audio/reaper-sws-extension { };
