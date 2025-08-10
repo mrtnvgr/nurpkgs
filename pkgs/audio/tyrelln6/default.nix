@@ -1,4 +1,4 @@
-{ stdenvNoCC, fetchurl, autoPatchelfHook, glib, cairo, freetype, xorg, zlib }:
+{ stdenvNoCC, fetchurl, autoPatchelfHook, glib, cairo, freetype, xorg, zlib, gtk3 }:
 stdenvNoCC.mkDerivation {
   name = "Tyrell N6";
   version = "3.0-beta16976";
@@ -7,10 +7,6 @@ stdenvNoCC.mkDerivation {
     url = "https://dl.u-he.com/releases/TyrellN6_300_public_beta_16976_Linux.tar.xz";
     hash = "sha256-c6xy/unbMjD+mgoNfqtxnYSQ+w6edcqIHmCAStLsZPI=";
   };
-
-  patchPhase = ''
-    rm TyrellN6/dialog{,.64}
-  '';
 
   nativeBuildInputs = [
     autoPatchelfHook
@@ -24,6 +20,7 @@ stdenvNoCC.mkDerivation {
     xorg.xcbutil
     xorg.libxcb
     zlib
+    gtk3
   ];
 
   installPhase = ''
