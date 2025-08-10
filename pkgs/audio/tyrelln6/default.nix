@@ -1,6 +1,6 @@
 # Resource patching taken from https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=uhe-hive-vst, thanks!
 
-{ stdenvNoCC, fetchurl, autoPatchelfHook, xxd, hexdump, glib, cairo, freetype, xorg, zlib, gtk3 }:
+{ stdenvNoCC, fetchurl, autoPatchelfHook, xxd, hexdump, glib, cairo, freetype, xorg, zlib, gtk3, xdg-user-dirs }:
 stdenvNoCC.mkDerivation {
   name = "Tyrell N6";
   version = "3.0-beta16976";
@@ -25,6 +25,7 @@ stdenvNoCC.mkDerivation {
     xorg.libxcb
     zlib
     gtk3
+    xdg-user-dirs
   ];
 
   buildPhase = ''
