@@ -1,5 +1,5 @@
-{ stdenv, fetchurl }:
-stdenv.mkDerivation {
+{ stdenvNoCC, fetchurl, autoPatchelfHook, glib, cairo, freetype, xorg, zlib }:
+stdenvNoCC.mkDerivation {
   name = "Tyrell N6";
   version = "3.0-beta16976";
 
@@ -12,7 +12,19 @@ stdenv.mkDerivation {
     rm TyrellN6/dialog{,.64}
   '';
 
-  dontBuild = true;
+  nativeBuildInputs = [
+    autoPatchelfHook
+  ];
+
+  buildInputs = [
+    glib
+    cairo
+    freetype
+    xorg.xcbutilkeysyms
+    xorg.xcbutil
+    xorg.libxcb
+    zlib
+  ];
 
   installPhase = ''
     runHook preInstall
