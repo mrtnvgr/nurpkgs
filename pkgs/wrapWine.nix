@@ -37,18 +37,21 @@ let
       ${winetricks}/bin/winetricks ${optionalString silent "-q"} ${concatStringsSep " " tricks}
     popd
   '';
+
+  boolToInt = x: if x then "1" else "0";
 in writeScriptBin name /* bash */ ''
   #!${runtimeShell}
 
   WINEARCH=win${if is64bits then "64" else "32"}
+
+  WINEFSYNC=${boolToInt fsync}
+  WINEESYNC=${boolToInt esync}
+
   PATH=${makeBinPath requiredPackages}:$PATH
 
   WINE_NIX="$HOME/.wine-nix"
   WINEPREFIX="$WINE_NIX/${name}"
   mkdir -p "$WINE_NIX"
-
-  ${optionalString fsync "WINEFSYNC=1"}
-  ${optionalString esync "WINEESYNC=1"}
 
   if [ ! -d "$WINEPREFIX" ]; then
     wineboot --init
