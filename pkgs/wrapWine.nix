@@ -4,14 +4,14 @@
 { pkgs }:
 let
   inherit (builtins) length concatStringsSep;
-  inherit (pkgs) lib cabextract winetricks writeScriptBin runtimeShell;
+  inherit (pkgs) lib cabextract winetricks writeScriptBin runtimeShell stdenv;
   inherit (lib) makeBinPath optionalString;
 in
 { name
 , executable
 , workdir ? null
 
-, is64bits ? true
+, is64bits ? stdenv.hostPlatform.system == "x86_64-linux"
 
 , tricks ? [ ]
 , silent ? true
@@ -20,7 +20,7 @@ in
 , postScript ? ""
 , setupScript ? ""
 
-, wine ? if is64bits then pkgs.wineWowPackages.stagingFull else pkgs.wine-staging
+, wine ? pkgs.wine-staging
 , wineFlags ? ""
 
 , fsync ? false
@@ -30,8 +30,6 @@ in
 , isWinBin ? true
 }:
 let
-  wineBin = "${wine}/bin/wine${optionalString is64bits "64"}";
-
   requiredPackages = [ wine cabextract ];
 
   tricksHook = optionalString ((length tricks) > 0) /* bash */ ''
@@ -71,7 +69,7 @@ in writeScriptBin name /* bash */ ''
 
   ${preScript}
 
-  ${optionalString isWinBin "${wineBin} ${wineFlags}"} "${executable}" "$@"
+  ${optionalString isWinBin "wine ${wineFlags}"} "${executable}" "$@"
 
   wineserver -w
 
