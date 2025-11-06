@@ -1,7 +1,7 @@
-{ stdenv, lib, writeScriptBin, cabextract, winetricks, runtimeShell, wine-staging }:
+{ stdenv, lib, writeShellApplication, cabextract, winetricks, wine-staging }:
 let
   inherit (builtins) length concatStringsSep;
-  inherit (lib) makeBinPath optionalString;
+  inherit (lib) optionalString;
 in
 { name
 , is64bits ? stdenv.hostPlatform.system == "x86_64-linux"
@@ -17,8 +17,6 @@ in
 , esync ? false
 }:
 let
-  requiredPackages = [ wine cabextract ];
-
   tricksHook = optionalString ((length tricks) > 0) /* bash */ ''
     pushd $(mktemp -d)
       ${winetricks}/bin/winetricks ${optionalString silent "-q"} ${concatStringsSep " " tricks}
@@ -26,27 +24,29 @@ let
   '';
 
   boolToInt = x: if x then "1" else "0";
-in writeScriptBin name /* bash */ ''
-  #!${runtimeShell}
+in writeShellApplication {
+  inherit name;
 
-  WINEARCH=win${if is64bits then "64" else "32"}
+  runtimeInputs = [ wine cabextract ];
 
-  WINEFSYNC=${boolToInt fsync}
-  WINEESYNC=${boolToInt esync}
+  text = /* bash */ ''
+    WINEARCH=win${if is64bits then "64" else "32"}
 
-  PATH=${makeBinPath requiredPackages}:$PATH
+    WINEFSYNC=${boolToInt fsync}
+    WINEESYNC=${boolToInt esync}
 
-  WINE_NIX="$HOME/.wine-nix"
-  WINEPREFIX="$WINE_NIX/${name}"
-  mkdir -p "$WINE_NIX"
+    WINE_NIX="$HOME/.wine-nix"
+    WINEPREFIX="$WINE_NIX/${name}"
+    mkdir -p "$WINE_NIX"
 
-  if [ ! -d "$WINEPREFIX" ]; then
-    wineboot --init
-    wineserver -w
+    if [ ! -d "$WINEPREFIX" ]; then
+      wineboot --init
+      wineserver -w
 
-    ${tricksHook}
-    wineserver -w
+      ${tricksHook}
+      wineserver -w
 
-    ${setupScript}
-  fi
-''
+      ${setupScript}
+    fi
+  '';
+}

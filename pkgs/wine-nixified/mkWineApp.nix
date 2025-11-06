@@ -1,4 +1,4 @@
-{ mkWineEnv, writeScriptBin, lib, runtimeShell }:
+{ mkWineEnv, writeShellApplication, lib }:
 
 { name
 
@@ -11,6 +11,8 @@
 , isWindowsExe ? true
 , wineFlags ? ""
 
+, meta ? { }
+
 } @ envArgs:
 
 let
@@ -20,24 +22,29 @@ let
     inherit name;
   });
 in
+writeShellApplication {
+  inherit name meta;
 
-writeScriptBin name /* bash */ ''
-  #!${runtimeShell}
+  # TODO: port mkWineEnv to writeShellApplication too:
+    # use `runtimeInputs = [ ... ]` instead of setting path manually
+    # remove runtimeShell
 
-  . ${env}
+  text = /* bash */ ''
+    . ${env}/bin/${name}
 
-  # $REPL is defined => start a shell in the env
-  if [ ! "$REPL" == "" ]; then
-    bash; exit 0
-  fi
+    # $REPL is defined => start a shell in the env
+    if [ ! "$REPL" == "" ]; then
+      bash; exit 0
+    fi
 
-  ${optionalString (workdir != null) "cd \"${workdir}\""}
+    ${optionalString (workdir != null) "cd \"${workdir}\""}
 
-  ${preScript}
+    ${preScript}
 
-  ${optionalString isWindowsExe "wine ${wineFlags}"} "${executable}" "$@"
+    ${optionalString isWindowsExe "wine ${wineFlags}"} "${executable}" "$@"
 
-  wineserver -w
+    wineserver -w
 
-  ${postScript}
-''
+    ${postScript}
+  '';
+}
