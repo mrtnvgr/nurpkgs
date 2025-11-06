@@ -40,15 +40,15 @@ let
 in writeScriptBin name /* bash */ ''
   #!${runtimeShell}
 
-  export WINEARCH=win${if is64bits then "64" else "32"}
-  export PATH=${makeBinPath requiredPackages}:$PATH
+  WINEARCH=win${if is64bits then "64" else "32"}
+  PATH=${makeBinPath requiredPackages}:$PATH
 
-  export WINE_NIX="$HOME/.wine-nix"
-  export WINEPREFIX="$WINE_NIX/${name}"
+  WINE_NIX="$HOME/.wine-nix"
+  WINEPREFIX="$WINE_NIX/${name}"
   mkdir -p "$WINE_NIX"
 
-  ${optionalString fsync "export WINEFSYNC=1"}
-  ${optionalString esync "export WINEESYNC=1"}
+  ${optionalString fsync "WINEFSYNC=1"}
+  ${optionalString esync "WINEESYNC=1"}
 
   if [ ! -d "$WINEPREFIX" ]; then
     wineboot --init
