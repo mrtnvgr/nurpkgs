@@ -27,7 +27,7 @@ let
     wine MiniInstaller.exe
     wineserver -w
   '';
-in wrapWine {
+in mkWineApp {
   inherit name;
 
   workdir = "$WINEPREFIX/drive_c/celeste";

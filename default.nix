@@ -28,7 +28,7 @@ in rec {
   wrapWine = throw "wrapWine has been deprecated, please use mkWineApp or mkWineEnv";
 
   # Games (wine)
-  celeste = p ./pkgs/games/wine/celeste { inherit wrapWine; };
+  celeste = p ./pkgs/games/wine/celeste { inherit mkWineApp; };
   celesteMods = p ./pkgs/games/wine/celeste/mods.nix { };
 
   # Overrides
