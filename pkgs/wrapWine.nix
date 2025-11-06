@@ -4,7 +4,7 @@
 { pkgs }:
 let
   inherit (builtins) length concatStringsSep;
-  inherit (pkgs) lib cabextract winetricks writeTextFile runtimeShell;
+  inherit (pkgs) lib cabextract winetricks writeScriptBin runtimeShell;
   inherit (lib) makeBinPath optionalString;
 in
 { name
@@ -23,12 +23,11 @@ in
 , wine ? if is64bits then pkgs.wineWowPackages.stagingFull else pkgs.wine-staging
 , wineFlags ? ""
 
-, fsync ? true
-, esync ? true
+, fsync ? false
+, esync ? false
 
 # Useful for native linux apps that require wine environment (e.g. reaper with yabridge)
 , isWinBin ? true
-, meta ? {}
 }:
 let
   wineBin = "${wine}/bin/wine${optionalString is64bits "64"}";
@@ -40,48 +39,41 @@ let
       ${winetricks}/bin/winetricks ${optionalString silent "-q"} ${concatStringsSep " " tricks}
     popd
   '';
-in writeTextFile {
-  inherit name meta;
+in writeScriptBin name /* bash */ ''
+  #!${runtimeShell}
 
-  text = /* bash */ ''
-    #! ${runtimeShell}
+  export WINEARCH=win${if is64bits then "64" else "32"}
+  export PATH=${makeBinPath requiredPackages}:$PATH
 
-    export WINEARCH=win${if is64bits then "64" else "32"}
-    export PATH=${makeBinPath requiredPackages}:$PATH
+  export WINE_NIX="$HOME/.wine-nix"
+  export WINEPREFIX="$WINE_NIX/${name}"
+  mkdir -p "$WINE_NIX"
 
-    export WINE_NIX="$HOME/.wine-nix"
-    export WINEPREFIX="$WINE_NIX/${name}"
-    mkdir -p "$WINE_NIX"
+  ${optionalString fsync "export WINEFSYNC=1"}
+  ${optionalString esync "export WINEESYNC=1"}
 
-    ${optionalString fsync "export WINEFSYNC=1"}
-    ${optionalString esync "export WINEESYNC=1"}
-
-    if [ ! -d "$WINEPREFIX" ]; then
-      wineboot --init
-      wineserver -w
-
-      ${tricksHook}
-      wineserver -w
-
-      ${setupScript}
-    fi
-
-    ${optionalString (workdir != null) "cd \"${workdir}\""}
-
-    # $REPL is defined => start a shell in the context
-    if [ ! "$REPL" == "" ]; then
-      bash; exit 0
-    fi
-
-    ${preScript}
-
-    ${optionalString isWinBin "${wineBin} ${wineFlags}"} "${executable}" "$@"
-
+  if [ ! -d "$WINEPREFIX" ]; then
+    wineboot --init
     wineserver -w
 
-    ${postScript}
-  '';
+    ${tricksHook}
+    wineserver -w
 
-  executable = true;
-  destination = "/bin/${name}";
-}
+    ${setupScript}
+  fi
+
+  ${optionalString (workdir != null) "cd \"${workdir}\""}
+
+  # $REPL is defined => start a shell in the context
+  if [ ! "$REPL" == "" ]; then
+    bash; exit 0
+  fi
+
+  ${preScript}
+
+  ${optionalString isWinBin "${wineBin} ${wineFlags}"} "${executable}" "$@"
+
+  wineserver -w
+
+  ${postScript}
+''
