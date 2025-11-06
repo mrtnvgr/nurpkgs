@@ -1,33 +1,20 @@
-# Heavily modified version of @lucasew's `wrapWine` package.
-# https://github.com/lucasew/nixcfg/blob/047c4913e9dceedd4957fb097bbf4803e5278563/nix/pkgs/wrapWine.nix
-
-{ pkgs }:
+{ stdenv, lib, writeScriptBin, cabextract, winetricks, runtimeShell, wine-staging }:
 let
   inherit (builtins) length concatStringsSep;
-  inherit (pkgs) lib cabextract winetricks writeScriptBin runtimeShell stdenv;
   inherit (lib) makeBinPath optionalString;
 in
 { name
-, executable
-, workdir ? null
-
 , is64bits ? stdenv.hostPlatform.system == "x86_64-linux"
 
 , tricks ? [ ]
 , silent ? true
 
-, preScript ? ""
-, postScript ? ""
 , setupScript ? ""
 
-, wine ? pkgs.wine-staging
-, wineFlags ? ""
+, wine ? wine-staging
 
 , fsync ? false
 , esync ? false
-
-# Useful for native linux apps that require wine environment (e.g. reaper with yabridge)
-, isWinBin ? true
 }:
 let
   requiredPackages = [ wine cabextract ];
@@ -62,19 +49,4 @@ in writeScriptBin name /* bash */ ''
 
     ${setupScript}
   fi
-
-  ${optionalString (workdir != null) "cd \"${workdir}\""}
-
-  # $REPL is defined => start a shell in the context
-  if [ ! "$REPL" == "" ]; then
-    bash; exit 0
-  fi
-
-  ${preScript}
-
-  ${optionalString isWinBin "wine ${wineFlags}"} "${executable}" "$@"
-
-  wineserver -w
-
-  ${postScript}
 ''
