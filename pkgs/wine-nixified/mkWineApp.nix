@@ -13,6 +13,7 @@
 
 , meta ? { }
 
+, ...
 } @ envArgs:
 
 let
