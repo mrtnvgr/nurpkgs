@@ -20,7 +20,7 @@ in
 }:
 let
   tricksHook = optionalString ((length tricks) > 0) /* bash */ ''
-    pushd $(mktemp -d)
+    pushd "$(mktemp -d)"
       ${winetricks}/bin/winetricks ${optionalString silent "-q"} ${concatStringsSep " " tricks}
     popd
   '';
@@ -51,4 +51,6 @@ in writeShellApplication {
       ${setupScript}
     fi
   '';
+
+  excludeShellChecks = [ "SC2034" ];
 }
