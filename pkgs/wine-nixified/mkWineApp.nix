@@ -31,7 +31,7 @@ in
   runtimeInputs = [ env ];
 
   text = /* bash */ ''
-    source ${name}
+    source "${env}/bin/${name}"
 
     # $REPL is defined => start a shell in the env
     if [ ! "$REPL" == "" ]; then
