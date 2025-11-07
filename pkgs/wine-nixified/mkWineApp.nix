@@ -26,10 +26,6 @@ in
 writeShellApplication {
   inherit name meta;
 
-  # TODO: port mkWineEnv to writeShellApplication too:
-    # use `runtimeInputs = [ ... ]` instead of setting path manually
-    # remove runtimeShell
-
   text = /* bash */ ''
     . ${env}/bin/${name}
 
