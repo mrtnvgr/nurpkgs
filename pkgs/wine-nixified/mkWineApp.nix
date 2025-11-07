@@ -13,6 +13,8 @@
 
 , meta ? { }
 
+, allowSubstitutes ? false
+
 , ...
 } @ envArgs:
 
@@ -20,11 +22,11 @@ let
   inherit (lib) optionalString;
 
   env = mkWineEnv (envArgs // {
-    inherit name;
+    inherit name allowSubstitutes;
   });
 in
 writeShellApplication {
-  inherit name meta;
+  inherit name meta allowSubstitutes;
 
   runtimeInputs = [ env ];
 

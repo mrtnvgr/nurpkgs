@@ -16,6 +16,8 @@ in
 , fsync ? false
 , esync ? false
 
+, allowSubstitutes ? false
+
 , ...
 }:
 let
@@ -27,7 +29,7 @@ let
 
   boolToInt = x: if x then "1" else "0";
 in writeShellApplication {
-  inherit name;
+  inherit name allowSubstitutes;
 
   runtimeInputs = [ wine cabextract ];
 
