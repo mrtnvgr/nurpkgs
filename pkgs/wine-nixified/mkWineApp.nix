@@ -28,9 +28,8 @@ in
 (writeShellApplication {
   inherit name meta;
 
-  runtimeInputs = [ env ];
-
   text = /* bash */ ''
+    # shellcheck disable=SC1091
     source "${env}/bin/${name}"
 
     # $REPL is defined => start a shell in the env
