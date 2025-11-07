@@ -15,6 +15,8 @@ in
 
 , fsync ? false
 , esync ? false
+
+, ...
 }:
 let
   tricksHook = optionalString ((length tricks) > 0) /* bash */ ''
