@@ -25,7 +25,7 @@ let
     inherit name allowSubstitutes;
   });
 in
-writeShellApplication {
+(writeShellApplication {
   inherit name meta;
 
   runtimeInputs = [ env ];
@@ -48,7 +48,7 @@ writeShellApplication {
 
     ${postScript}
   '';
-}.overrideAttrs {
+}).overrideAttrs {
   # TODO: https://github.com/NixOS/nixpkgs/issues/344414
   inherit allowSubstitutes;
 }
