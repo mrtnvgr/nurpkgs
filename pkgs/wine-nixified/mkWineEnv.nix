@@ -29,7 +29,7 @@ let
 
   boolToInt = x: if x then "1" else "0";
 in writeShellApplication {
-  inherit name allowSubstitutes;
+  inherit name;
 
   runtimeInputs = [ wine cabextract ];
 
@@ -55,4 +55,7 @@ in writeShellApplication {
   '';
 
   excludeShellChecks = [ "SC2034" ];
+}.overrideAttrs {
+  # TODO: https://github.com/NixOS/nixpkgs/issues/344414
+  inherit allowSubstitutes;
 }
