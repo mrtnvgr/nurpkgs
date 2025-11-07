@@ -11,6 +11,8 @@ in
 
 , setupScript ? ""
 
+, postScript ? ""
+
 , wine ? wine-staging
 
 , fsync ? false
@@ -34,13 +36,13 @@ in (writeShellApplication {
   runtimeInputs = [ wine cabextract ];
 
   text = /* bash */ ''
-    WINEARCH=win${if is64bits then "64" else "32"}
+    export WINEARCH=win${if is64bits then "64" else "32"}
 
-    WINEFSYNC=${boolToInt fsync}
-    WINEESYNC=${boolToInt esync}
+    export WINEFSYNC=${boolToInt fsync}
+    export WINEESYNC=${boolToInt esync}
 
-    WINE_NIX="$HOME/.wine-nix"
-    WINEPREFIX="$WINE_NIX/${name}"
+    export WINE_NIX="$HOME/.wine-nix"
+    export WINEPREFIX="$WINE_NIX/${name}"
     mkdir -p "$WINE_NIX"
 
     if [ ! -d "$WINEPREFIX" ]; then
@@ -52,9 +54,9 @@ in (writeShellApplication {
 
       ${setupScript}
     fi
-  '';
 
-  excludeShellChecks = [ "SC2034" ];
+    ${postScript}
+  '';
 }).overrideAttrs {
   # TODO: https://github.com/NixOS/nixpkgs/issues/344414
   inherit allowSubstitutes;
