@@ -47,8 +47,9 @@ in rec {
   neural-amp-modeler-lv2 = p ./pkgs/audio/neural-amp-modeler-lv2 { };
 
   distrho-ports-vst3 = pkgs.distrho-ports.override {
-    buildLV2 = false;
-    buildVST2 = false;
+    # TODO: waiting for the change to arrive in `nixos-unstable`
+    # buildLV2 = false;
+    # buildVST2 = false;
   };
 
   vitalium-vst3 = distrho-ports-vst3.override {
