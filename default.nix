@@ -60,6 +60,15 @@ in rec {
     buildStandalone = false;
   }).overrideAttrs { name = "surge-XT-vst3"; };
 
+  lsp-plugins-vst3 = (pkgs.lsp-plugins.override {
+    buildVST2 = false;
+    buildCLAP = false;
+    buildLV2 = false;
+    buildLADSPA = false;
+    buildJACK = false;
+    buildGStreamer = false;
+  }).overrideAttrs { name = "lsp-plugins-vst3"; };
+
   artworks = p ./pkgs/audio/artworks { };
   nam-trainer = p ./pkgs/audio/nam-trainer { };
 
