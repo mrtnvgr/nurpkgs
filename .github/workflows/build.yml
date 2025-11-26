@@ -31,7 +31,7 @@ jobs:
     - name: Build nix packages
       env:
         NIXPKGS_ALLOW_UNFREE: 1
-      run: nix flake check
+      run: nix flake check --impure
 
     - name: Trigger NUR update
       run: curl -XPOST "https://nur-update.nix-community.org/update?repo=mrtnvgr"
