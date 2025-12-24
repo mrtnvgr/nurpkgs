@@ -88,5 +88,5 @@ in rec {
   });
 
   # Reaper themes
-  reapertips-dark = p ./pkgs/reapertips/dark.nix;
+  reapertips-dark = p ./pkgs/reapertips/dark.nix { };
 }
