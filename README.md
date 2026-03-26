@@ -21,7 +21,6 @@
 
 #### DAWs
 
-- [bitwig-custom](https://bitwig.com) - patchable Bitwig Studio
 - [js_ReaScriptAPI](https://github.com/juliansader/ReaExtensions)
 
 #### Plugins

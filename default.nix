@@ -27,8 +27,6 @@ in rec {
   fetchurl-gz = p ./pkgs/builders/fetchers/fetchurl-gz { };
 
   # Audio
-  bitwig-custom = p ./pkgs/audio/bitwig-custom/default.nix { };
-
   js_ReaScriptAPI = p ./pkgs/audio/js_ReaScriptAPI { };
 
   # OneTrick-KEYS = p ./pkgs/audio/OneTrick-KEYS { };
