@@ -69,6 +69,8 @@ in rec {
     buildGStreamer = false;
   }).overrideAttrs { pname = "lsp-plugins-vst3"; };
 
+  keepOnlyVST3 = p ./pkgs/audio/keepOnlyVST3.nix { };
+
   artworks = p ./pkgs/audio/artworks { };
   nam-trainer = p ./pkgs/audio/nam-trainer { };
 
