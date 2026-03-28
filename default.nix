@@ -74,6 +74,8 @@ in rec {
   artworks = p ./pkgs/audio/artworks { };
   nam-trainer = p ./pkgs/audio/nam-trainer { };
 
+  convert-gig-file = p ./pkgs/convert-gig-file { };
+
   # Media
   obs-studio-plus = (pkgs.wrapOBS {
     plugins = with pkgs.obs-studio-plugins; [
