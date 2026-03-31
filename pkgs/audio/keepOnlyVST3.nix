@@ -1,3 +1,4 @@
+_:
 drv:
 drv.overrideAttrs (oldAttrs: {
   postInstall = (oldAttrs.postInstall or "") + ''
