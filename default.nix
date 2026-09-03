@@ -32,7 +32,6 @@ in rec {
   # OneTrick-KEYS = p ./pkgs/audio/OneTrick-KEYS { };
   TAL-NoiseMaker = p ./pkgs/audio/TAL-NoiseMaker { };
 
-  artworks = p ./pkgs/audio/artworks { };
   nam-trainer = p ./pkgs/audio/nam-trainer { };
 
   convert-gig-file = p ./pkgs/convert-gig-file { };
