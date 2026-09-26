@@ -18,10 +18,6 @@
 
 ### Audio
 
-#### DAWs
-
-- [js_ReaScriptAPI](https://github.com/juliansader/ReaExtensions)
-
 #### Plugins
 
 - [TAL-NoiseMaker](https://tal-software.com/products/TAL-NoiseMaker)
