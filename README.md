@@ -15,7 +15,6 @@
 - [fetchzip-gz](https://github.com/mrtnvgr/nurpkgs)
 - [mkWineApp](https://github.com/mrtnvgr/nurpkgs)
 - [mkWineEnv](https://github.com/mrtnvgr/nurpkgs)
-- [obs-studio-plus](https://obsproject.com)
 - [openutau-lunai](https://github.com/keirokeer/OpenUtau-lunai)
 - [pitchnet](https://github.com/SessionLoops/PitchNet)
 - [soundfont-touhou](https://musical-artifacts.com/artifacts/433)
