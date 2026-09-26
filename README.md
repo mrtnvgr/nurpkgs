@@ -9,12 +9,11 @@
 
 ### Soundfonts
 
-- [touhou](https://musical-artifacts.com/artifacts/433)
+- [soundfont-touhou](https://musical-artifacts.com/artifacts/433)
 
 ### Games
 
 - [celeste](https://www.celestegame.com)
-
 - [celeste-classic-2](https://mattmakesgames.itch.io/celeste-classic-2)
 
 ### Audio
