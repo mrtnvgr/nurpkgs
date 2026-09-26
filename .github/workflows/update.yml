@@ -52,7 +52,6 @@ jobs:
         }
         update pitchnet
         update openutau-lunai
-        update nam-trainer
         update --version=branch convert-gig-file
         echo "failed=$failed" >> "$GITHUB_OUTPUT"
 
