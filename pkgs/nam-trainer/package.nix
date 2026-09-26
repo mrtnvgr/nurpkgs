@@ -46,7 +46,7 @@ python3Packages.buildPythonApplication rec {
     hash = "sha256-VgjSeOB3ayhgzv4pGMOdUYhHKFC23Nr6hIxQ/p9SZLw=";
   };
 
-  dependencies = with python3Packages; [ numpy torch wavio transformers sounddevice scipy pytorch-lightning pydantic onnxruntime onnx matplotlib auraloss pytest ];
+  dependencies = with python3Packages; [ numpy torch wavio transformers sounddevice scipy pytorch-lightning pydantic onnxruntime onnx matplotlib auraloss pytest tensorboard tqdm ];
 
   pyproject = true;
   build-system = [ setuptools ];
@@ -57,6 +57,5 @@ python3Packages.buildPythonApplication rec {
     license = licenses.mit;
     platforms = platforms.all;
     mainProgram = "nam";
-    broken = true;
   };
 }
