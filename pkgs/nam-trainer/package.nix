@@ -57,5 +57,6 @@ python3Packages.buildPythonApplication rec {
     license = licenses.mit;
     platforms = platforms.all;
     mainProgram = "nam";
+    broken = true;
   };
 }
