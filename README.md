@@ -24,10 +24,6 @@
 - [ANINA](https://crql.works/archive/anina/)
 - [PitchNet](https://github.com/SessionLoops/PitchNet)
 
-#### Utilities
-
-- [nam-trainer](https://github.com/sdatkinson/neural-amp-modeler)
-
 ### Media
 
 - **obs-studio-plus** - obs with plugins for wayland, pipewire support and more
