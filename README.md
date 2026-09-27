@@ -6,7 +6,6 @@
 [![Cachix Cache](https://img.shields.io/badge/cachix-mrtnvgr-blue.svg)](https://mrtnvgr.cachix.org)
 
 <!-- packages:begin -->
-- [TAL-NoiseMaker](https://tal-software.com/products/TAL-NoiseMaker)
 - [anina](https://crql.works/archive/anina/)
 - [celeste](https://www.celestegame.com)
 - [celeste-classic-2](https://mattmakesgames.itch.io/celeste-classic-2)
